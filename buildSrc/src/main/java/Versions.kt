@@ -21,4 +21,6 @@ object Versions {
     const val glide = "4.13.2"
     const val epoxy = "5.1.1"
     const val kotlinStdLib = "1.9.10"
+    const val navigationFragmentKtx = "2.5.3"
+    const val navigationUiKtx = "2.5.3"
 }

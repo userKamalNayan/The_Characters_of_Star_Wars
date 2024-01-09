@@ -1,9 +1,11 @@
 /** @Author Kamal Nayan
  **/
 object Dependencies {
-    val material by lazy {"com.google.android.material:material:${Versions.material}"}
-    val appCompat by lazy {"androidx.appcompat:appcompat:${Versions.appcompat}"}
-    val constraintLayout by lazy {"androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"}
+    val material by lazy { "com.google.android.material:material:${Versions.material}" }
+    val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.appcompat}" }
+    val navigationFragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.navigationFragmentKtx}" }
+    val navigationUi by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.navigationUiKtx}" }
+    val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}" }
     val coreKtx by lazy { "androidx.core:core-ktx:${Versions.coreKtx}" }
     val lifecycleKtx by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleKtx}" }
     val lifecycleViewModelKtx by lazy { "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewModelKtx}" }

@@ -38,6 +38,8 @@ android {
     }
     buildFeatures {
         buildConfig = true
+        dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -45,11 +47,15 @@ dependencies {
     implementation(project(Module.commons))
     implementation(project(Module.data))
     implementation(project(Module.domain))
-
+    implementation(Dependencies.navigationFragment)
+    implementation(Dependencies.navigationUi)
     implementation(Dependencies.coreKtx)
     implementation(Dependencies.appCompat)
     implementation(Dependencies.material)
     implementation(Dependencies.constraintLayout)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     testImplementation(Dependencies.junit)
     androidTestImplementation(Dependencies.junitExt)
     androidTestImplementation(Dependencies.espresso)
