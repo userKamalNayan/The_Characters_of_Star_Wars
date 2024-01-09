@@ -1,6 +1,6 @@
 package com.kamalnayan.knstarwars.di
 
-import com.kamalnayan.data.api.api.ApiService
+import com.kamalnayan.data.api.ApiService
 import com.kamalnayan.knstarwars.BuildConfig
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
