@@ -21,7 +21,7 @@
 
         <argument
             android:name="character"
-            app:argType="com.kamalnayan.domain.domain.character.CharacterItem"
+            app:argType="com.kamalnayan.domain.domain.models.character.CharacterItem"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>

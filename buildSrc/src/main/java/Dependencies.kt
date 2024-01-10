@@ -32,6 +32,8 @@ object Dependencies {
     val epoxyProcessor by lazy { "com.airbnb.android:epoxy-processor:${Versions.epoxy}" }
 
     val kotlinStdLib by lazy { "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinStdLib}" }
+    val shimmer by lazy {  "com.facebook.shimmer:shimmer:${Versions.shimmer}"
+    }
 }
 
 object Module {

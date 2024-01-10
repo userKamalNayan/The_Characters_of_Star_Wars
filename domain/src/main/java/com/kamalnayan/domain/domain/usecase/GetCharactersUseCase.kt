@@ -1,7 +1,7 @@
 package com.kamalnayan.domain.domain.usecase
 
 import com.kamalnayan.domain.domain.base.usecase.BaseUseCase
-import com.kamalnayan.domain.domain.character.CharactersResponse
+import com.kamalnayan.domain.domain.models.character.CharactersResponse
 import com.kamalnayan.domain.domain.repository.ICharactersRepository
 import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject

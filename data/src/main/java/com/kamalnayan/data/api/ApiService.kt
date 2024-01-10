@@ -1,8 +1,10 @@
 package com.kamalnayan.data.api
 
-import com.kamalnayan.domain.domain.character.CharactersResponse
+import com.kamalnayan.domain.domain.models.character.CharactersResponse
+import com.kamalnayan.domain.domain.models.film.FilmResponse
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
+import retrofit2.http.Url
 
 /** @Author Kamal Nayan
 Created on: 09/01/24
@@ -10,4 +12,7 @@ Created on: 09/01/24
 interface ApiService {
     @GET("people/")
     suspend fun getCharacters(): ApiResponse<CharactersResponse>
+
+    @GET
+    suspend fun getFilm(@Url filmUrl: String): ApiResponse<FilmResponse>
 }

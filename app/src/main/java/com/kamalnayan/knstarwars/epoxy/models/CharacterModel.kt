@@ -5,7 +5,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
-import com.kamalnayan.domain.domain.character.CharacterItem
+import com.kamalnayan.domain.domain.models.character.CharacterItem
 import com.kamalnayan.knstarwars.R
 import com.kamalnayan.knstarwars.databinding.ItemEpoxyCharacterItemBinding
 import com.kamalnayan.knstarwars.util.`typealias`.CharacterClickCallback

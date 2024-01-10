@@ -7,6 +7,4 @@ import kotlinx.parcelize.Parcelize
 Created on: 09/01/24
  **/
 @Parcelize
-open class BaseResponse : Parcelable {
-
-}
+open class BaseResponse : Parcelable

@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/tv_character"
-                style="@style/TextAppearance.AppCompat.Headline.Character"
+                style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"

@@ -4,7 +4,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
     kotlin("kapt")
-    id ("androidx.navigation.safeargs.kotlin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -80,6 +80,8 @@ dependencies {
 
     implementation(Dependencies.coroutineAndroid)
     implementation(Dependencies.kotlinStdLib)
+
+    implementation(Dependencies.shimmer)
 }
 
 kapt {

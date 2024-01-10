@@ -1,7 +1,7 @@
 package com.kamalnayan.knstarwars.epoxy.controller
 
 import com.airbnb.epoxy.AsyncEpoxyController
-import com.kamalnayan.domain.domain.character.CharacterItem
+import com.kamalnayan.domain.domain.models.character.CharacterItem
 import com.kamalnayan.knstarwars.epoxy.models.character
 import com.kamalnayan.knstarwars.util.`typealias`.CharacterClickCallback
 

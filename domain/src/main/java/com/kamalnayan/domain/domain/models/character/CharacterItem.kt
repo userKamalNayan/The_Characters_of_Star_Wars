@@ -1,4 +1,4 @@
-package com.kamalnayan.domain.domain.character
+package com.kamalnayan.domain.domain.models.character
 
 
 import com.google.gson.annotations.SerializedName

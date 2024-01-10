@@ -3,7 +3,7 @@ package com.kamalnayan.knstarwars.ui.fragments.characters
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.kamalnayan.domain.domain.character.CharacterItem
+import com.kamalnayan.domain.domain.models.character.CharacterItem
 import com.kamalnayan.domain.domain.usecase.GetCharactersUseCase
 import com.kamalnayan.knstarwars.base.BaseViewModel
 import com.skydoves.sandwich.onSuccess

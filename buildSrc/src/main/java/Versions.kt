@@ -24,4 +24,5 @@ object Versions {
     const val kotlinStdLib = "1.9.10"
     const val navigationFragmentKtx = "2.5.3"
     const val navigationUiKtx = "2.5.3"
+    const val shimmer = "0.5.0"
 }
