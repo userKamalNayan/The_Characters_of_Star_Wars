@@ -1,13 +1,19 @@
 package com.kamalnayan.knstarwars.ui.fragments.characters
 
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.kamalnayan.commons.modifier.CharacterModifier
+import com.kamalnayan.commons.modifier.ModifierType
 import com.kamalnayan.knstarwars.R
 import com.kamalnayan.knstarwars.base.BaseFragment
 import com.kamalnayan.knstarwars.databinding.FragmentCharactersBinding
 import com.kamalnayan.knstarwars.epoxy.controller.CharactersController
 import com.kamalnayan.knstarwars.ui.dialog.BtsCharacterDataModifier
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharactersFragment :
@@ -18,12 +24,14 @@ class CharactersFragment :
         CharactersController()
     }
 
-    //Give an option for filtering and sorting based on name, gender, created, updated, etc.
-// Filter and sort option item list should open in a bottom sheet.
+    private var sortAndFilterSelection: Pair<CharacterModifier, CharacterModifier> =
+        CharacterModifier.Default(ModifierType.Sort) to CharacterModifier.Default(ModifierType.Filter)
+        set(value) {
+            field = value
+            setObservers()
+        }
 
     override fun fetchData() {
-        if (controller.charactersItems.isNullOrEmpty())
-            viewModel.getCharacters()
     }
 
     override fun setViewModelToBinding() {
@@ -59,15 +67,24 @@ class CharactersFragment :
     }
 
     private fun showModifierBottomSheet() {
-        BtsCharacterDataModifier().show(parentFragmentManager, null)
+        val bottomSheet = BtsCharacterDataModifier()
+        bottomSheet.apply {
+            setSelectedSortAndFilter(this@CharactersFragment.sortAndFilterSelection)
+            setSelectionChangedListener {
+                this@CharactersFragment.sortAndFilterSelection = it
+            }
+        }
+        bottomSheet.show(childFragmentManager, null)
     }
 
     override fun setObservers() {
         with(viewModel) {
-            charactersData.observe(viewLifecycleOwner) { response ->
-                response?.let {
-                    controller.charactersItems = it
-                }
+            lifecycleScope.launch {
+                charactersData(sortAndFilterSelection)
+                    .flowWithLifecycle(viewLifecycleOwner.lifecycle)
+                    .collectLatest {
+                        controller.submitData(it)
+                    }
             }
         }
     }

@@ -46,9 +46,9 @@ class FilmsFragment : BaseFragment<FragmentFilmsBinding>(FragmentFilmsBinding::i
     }
 
     private fun setToolbar() {
-        with(binding.toolbar){
-            ivMore.isVisible=false
-            tvTitle.text = getString(R.string.format_film_by,args.character?.name.orEmpty())
+        with(binding.toolbar) {
+            ivMore.isVisible = false
+            tvTitle.text = getString(R.string.format_film_by, args.character?.name.orEmpty())
         }
     }
 
@@ -82,11 +82,11 @@ class FilmsFragment : BaseFragment<FragmentFilmsBinding>(FragmentFilmsBinding::i
             }
 
             // build shimmer for the items which are being loaded
-           ( 0 until ((args.character?.films?.size ?: 0).minus(filmsList.size))).forEach {
+            (0 until ((args.character?.films?.size ?: 0).minus(filmsList.size))).forEach {
                 filmSkeleton {
                     id(it)
                 }
-           }
+            }
         }
     }
 }

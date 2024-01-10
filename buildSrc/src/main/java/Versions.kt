@@ -25,4 +25,6 @@ object Versions {
     const val navigationFragmentKtx = "2.5.3"
     const val navigationUiKtx = "2.5.3"
     const val shimmer = "0.5.0"
+    const val room = "2.5.2"
+    const val paging = "3.2.1"
 }

@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/text_sort_by"
             android:textAlignment="viewStart"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/radio_group"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +37,7 @@
             android:checkedButton="@id/radio_default"
             android:paddingHorizontal="@dimen/horizontal_padding"
             android:paddingVertical="@dimen/vertical_padding"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_filter_by"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_sort_by">
@@ -56,11 +57,11 @@
                 android:text="@string/text_name" />
 
             <RadioButton
-                android:id="@+id/radio_gender"
+                android:id="@+id/radio_height"
                 style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/text_gender" />
+                android:text="@string/text_height" />
 
             <RadioButton
                 android:id="@+id/radio_created"
@@ -75,6 +76,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_updated" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_filter_by"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_filter_by"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/radio_group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radio_group" />
+
+        <RadioGroup
+            android:id="@+id/filter_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/radio_none"
+            android:paddingHorizontal="@dimen/horizontal_padding"
+            android:paddingVertical="@dimen/vertical_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_filter_by">
+
+            <RadioButton
+                android:id="@+id/radio_none"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_none" />
+
+            <RadioButton
+                android:id="@+id/radio_male"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_male" />
+
+            <RadioButton
+                android:id="@+id/radio_female"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_female" />
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

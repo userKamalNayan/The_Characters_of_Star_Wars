@@ -23,6 +23,7 @@ object Dependencies {
     val sandwich by lazy { "com.github.skydoves:sandwich:${Versions.sandwich}" }
     val coroutineAndroid by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutine}" }
     val coroutineCore by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutine}" }
+
     val glide by lazy { "com.github.bumptech.glide:glide:${Versions.glide}" }
     val glideCompiler by lazy { "com.github.bumptech.glide:compiler:${Versions.glide}" }
 
@@ -32,8 +33,14 @@ object Dependencies {
     val epoxyProcessor by lazy { "com.airbnb.android:epoxy-processor:${Versions.epoxy}" }
 
     val kotlinStdLib by lazy { "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinStdLib}" }
-    val shimmer by lazy {  "com.facebook.shimmer:shimmer:${Versions.shimmer}"
-    }
+    val shimmer by lazy { "com.facebook.shimmer:shimmer:${Versions.shimmer}" }
+
+    val room by lazy { "androidx.room:room-runtime:${Versions.room}" }
+    val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
+    val roomPaging by lazy { "androidx.room:room-paging:${Versions.room}" }
+
+    val paging by lazy { "androidx.paging:paging-runtime:${Versions.paging}" }
+
 }
 
 object Module {

@@ -6,9 +6,14 @@
     <string name="format_film_by">Films by %s</string>
     <string name="title_characters_screen">Star Wars Characters</string>
     <string name="text_sort_by">Sort By</string>
+    <string name="text_filter_by">Filter By</string>
     <string name="text_default">Default</string>
     <string name="text_name">Name</string>
     <string name="text_gender">Gender</string>
+    <string name="text_height">Height</string>
     <string name="text_created">Created</string>
     <string name="text_updated">Updated</string>
+    <string name="text_male">Male</string>
+    <string name="text_none">None</string>
+    <string name="text_female">Female</string>
 </resources>
