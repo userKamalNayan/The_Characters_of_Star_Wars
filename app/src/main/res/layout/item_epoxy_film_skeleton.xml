@@ -28,7 +28,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@drawable/bg_shimmer"
+                    android:background="@drawable/bg_round_dark"
                     android:paddingVertical="@dimen/vertical_padding" />
 
             </com.facebook.shimmer.ShimmerFrameLayout>
@@ -44,7 +44,7 @@
                 app:layout_constraintTop_toBottomOf="@id/film_name">
 
                 <View
-                    android:background="@drawable/bg_shimmer"
+                    android:background="@drawable/bg_round_dark"
                     android:layout_width="match_parent"
                     android:layout_height="100dp" />
             </com.facebook.shimmer.ShimmerFrameLayout>
@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toBottomOf="@id/opening_crawl">
 
                 <View
-                    android:background="@drawable/bg_shimmer"
+                    android:background="@drawable/bg_round_dark"
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
             </com.facebook.shimmer.ShimmerFrameLayout>

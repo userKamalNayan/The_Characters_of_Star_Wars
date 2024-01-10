@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottomsheet"
+        android:minHeight="200dp"
+        android:paddingHorizontal="@dimen/horizontal_padding"
+        android:paddingVertical="@dimen/vertical_padding"
+        tools:context=".ui.dialog.BtsCharacterDataModifier">
+
+        <TextView
+            android:id="@+id/tv_sort_by"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_sort_by"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/radio_group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/radio_default"
+            android:paddingHorizontal="@dimen/horizontal_padding"
+            android:paddingVertical="@dimen/vertical_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sort_by">
+
+            <RadioButton
+                android:id="@+id/radio_default"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_default" />
+
+            <RadioButton
+                android:id="@+id/radio_name"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_name" />
+
+            <RadioButton
+                android:id="@+id/radio_gender"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_gender" />
+
+            <RadioButton
+                android:id="@+id/radio_created"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_created" />
+
+            <RadioButton
+                android:id="@+id/radio_updated"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton.Options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_updated" />
+        </RadioGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

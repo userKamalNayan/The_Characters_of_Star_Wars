@@ -2,10 +2,11 @@ package com.kamalnayan.knstarwars.ui.fragments.characters
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.kamalnayan.knstarwars.R
 import com.kamalnayan.knstarwars.base.BaseFragment
 import com.kamalnayan.knstarwars.databinding.FragmentCharactersBinding
 import com.kamalnayan.knstarwars.epoxy.controller.CharactersController
-import com.kamalnayan.knstarwars.util.extension.loadMoreListener
+import com.kamalnayan.knstarwars.ui.dialog.BtsCharacterDataModifier
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +17,9 @@ class CharactersFragment :
     private val controller by lazy {
         CharactersController()
     }
+
+    //Give an option for filtering and sorting based on name, gender, created, updated, etc.
+// Filter and sort option item list should open in a bottom sheet.
 
     override fun fetchData() {
         if (controller.charactersItems.isNullOrEmpty())
@@ -29,6 +33,9 @@ class CharactersFragment :
     override fun initViews() {
         with(binding) {
             epoxyRecycler.setController(controller)
+            with(toolbar) {
+                tvTitle.text = getString(R.string.title_characters_screen)
+            }
         }
     }
 
@@ -37,8 +44,8 @@ class CharactersFragment :
 
     override fun setListeners() {
         with(binding) {
-            epoxyRecycler.loadMoreListener {
-
+            toolbar.ivMore.setOnClickListener {
+                showModifierBottomSheet()
             }
         }
 
@@ -49,6 +56,10 @@ class CharactersFragment :
                 )
             )
         }
+    }
+
+    private fun showModifierBottomSheet() {
+        BtsCharacterDataModifier().show(parentFragmentManager, null)
     }
 
     override fun setObservers() {

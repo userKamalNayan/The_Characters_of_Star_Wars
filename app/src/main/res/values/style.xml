@@ -43,9 +43,19 @@
         <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:textColor">@color/subtitle_value</item>
     </style>
+
     <style name="TextAppearance.AppCompat.Caption" parent="TextAppearance.AppCompat.Title">
         <item name="android:fontFamily">monospace</item>
         <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:textColor">@color/subtitle_text</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.AppCompat.CompoundButton.RadioButton.Options" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textColor">@color/subtitle_value</item>
     </style>
 </resources>
