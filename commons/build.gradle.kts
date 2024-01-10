@@ -58,4 +58,6 @@ dependencies {
     api(Dependencies.coroutineCore)
 
 
+    api(Dependencies.glide)
+    kapt(Dependencies.glideCompiler)
 }

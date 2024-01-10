@@ -1,32 +1,44 @@
 package com.kamalnayan.knstarwars.ui.fragments.films
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.kamalnayan.knstarwars.R
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import com.kamalnayan.knstarwars.base.BaseFragment
+import com.kamalnayan.knstarwars.databinding.FragmentFilmsBinding
 
-class FilmsFragment : Fragment() {
+class FilmsFragment : BaseFragment<FragmentFilmsBinding>(FragmentFilmsBinding::inflate) {
 
     companion object {
         fun newInstance() = FilmsFragment()
     }
 
-    private lateinit var viewModel: FilmsViewModel
+    private val args by navArgs<FilmsFragmentArgs>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_films, container, false)
-    }
+    private val viewModel by viewModels<FilmsViewModel>()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FilmsViewModel::class.java)
+    override fun fetchData() {
 
     }
+
+    override fun setViewModelToBinding() {
+
+    }
+
+    override fun initViews() {
+        Toast.makeText(requireContext(), args.character?.name, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setData() {
+
+    }
+
+    override fun setListeners() {
+
+    }
+
+    override fun setObservers() {
+
+    }
+
 
 }

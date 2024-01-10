@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/corner_smooth"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_round_10_with_ripple"
+            android:clickable="true"
+            android:id="@+id/parent_container"
+            android:paddingVertical="@dimen/vertical_padding">
+
+            <TextView
+                android:id="@+id/tv_character"
+                style="@style/TextAppearance.AppCompat.Headline.Character"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:padding="16dp"
+                app:layout_constraintBottom_toTopOf="@id/tv_gender_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Kamal Nayan" />
+
+            <TextView
+                android:id="@+id/tv_gender_title"
+                style="@style/TextAppearance.AppCompat.Title.Character"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/title_gender"
+                app:layout_constraintBottom_toTopOf="@id/tv_height_title"
+                app:layout_constraintEnd_toStartOf="@id/tv_gender_value"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_character"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/tv_gender_value"
+                style="@style/TextAppearance.AppCompat.Title.Character.Value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/tv_height_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_gender_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_character"
+                tools:text="Gender" />
+
+            <TextView
+                android:id="@+id/tv_height_title"
+                style="@style/TextAppearance.AppCompat.Title.Character"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/title_height"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_gender_value"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_gender_title"
+                app:layout_constraintWidth_percent="0.55" />
+
+
+            <TextView
+                android:id="@+id/tv_height_value"
+                style="@style/TextAppearance.AppCompat.Title.Character.Value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_height_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_gender_title"
+                tools:text="Height" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

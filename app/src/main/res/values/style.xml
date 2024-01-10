@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Shape_Round_4">
+        <item name="shapeCornerFamily">rounded</item>
+        <item name="cornerSize">4%</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Headline.Character">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Title">
+        <item name="android:paddingStart">@dimen/horizontal_padding</item>
+        <item name="android:paddingEnd">@dimen/horizontal_padding</item>
+        <item name="android:paddingTop">@dimen/vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/vertical_padding</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Title.Character" parent="TextAppearance.AppCompat.Title">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/title_text</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Title.Character.Value" parent="TextAppearance.AppCompat.Title">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/title_value</item>
+
+    </style>
+</resources>

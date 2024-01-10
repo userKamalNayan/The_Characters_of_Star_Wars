@@ -13,6 +13,7 @@ object Versions {
     const val jUnitExt = "1.1.5"
     const val espresso = "3.5.1"
     const val hilt = "2.48"
+    const val safeArgs = "2.5.1"
     const val retrofit = "2.9.0"
     const val okhttp = "5.0.0-alpha.2"
     const val loggingInterceptor = "4.8.1"

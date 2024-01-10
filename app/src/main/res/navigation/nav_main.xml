@@ -8,11 +8,22 @@
     <fragment
         android:id="@+id/fragment_characters"
         android:name="com.kamalnayan.knstarwars.ui.fragments.characters.CharactersFragment"
-        tools:layout="@layout/fragment_characters" />
+        tools:layout="@layout/fragment_characters" >
+        <action
+            android:id="@+id/action_fragment_characters_to_fragment_films"
+            app:destination="@id/fragment_films" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_films"
         android:name="com.kamalnayan.knstarwars.ui.fragments.films.FilmsFragment"
-        tools:layout="@layout/fragment_films" />
+        tools:layout="@layout/fragment_films" >
+
+        <argument
+            android:name="character"
+            app:argType="com.kamalnayan.domain.domain.character.CharacterItem"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
 </navigation>
