@@ -12,7 +12,7 @@ Created on: 09/01/24
 interface ICharactersRepository {
     suspend fun getCharacters(): Flow<List<CharacterItem>>
 
-    suspend fun getFilm(filmUrl: String): ApiResponse<FilmResponse>
+    suspend fun getFilm(filmUrl: String): FilmResponse?
 
     suspend fun fetchCharactersFromRemote(page: Int): ApiResponse<CharactersResponse>
 }

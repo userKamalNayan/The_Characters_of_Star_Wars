@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 import com.kamalnayan.domain.domain.base.response.BaseResponse
 import kotlinx.parcelize.Parcelize
 
+@Entity(tableName = "film_table")
 @Parcelize
 data class FilmResponse(
     val characters: List<String>,
@@ -23,6 +24,7 @@ data class FilmResponse(
     val species: List<String>,
     val starships: List<String>,
     val title: String,
+    @PrimaryKey
     val url: String,
     val vehicles: List<String>
 ) : BaseResponse()

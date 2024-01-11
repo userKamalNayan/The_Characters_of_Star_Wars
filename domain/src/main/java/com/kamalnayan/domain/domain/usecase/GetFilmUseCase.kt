@@ -10,8 +10,8 @@ import javax.inject.Inject
 Created on: 10/01/24
  **/
 class GetFilmUseCase @Inject constructor(private val repository: ICharactersRepository) :
-    BaseUseCase<String, ApiResponse<FilmResponse>>() {
-    override suspend fun invoke(filmUrl: String?): ApiResponse<FilmResponse> {
+    BaseUseCase<String, FilmResponse?>() {
+    override suspend fun invoke(filmUrl: String?): FilmResponse? {
         return repository.getFilm(filmUrl.orEmpty())
     }
 }
