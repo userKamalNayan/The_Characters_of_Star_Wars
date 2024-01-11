@@ -9,6 +9,7 @@ import com.kamalnayan.domain.domain.usecase.FetchCharactersFromRemoteUseCase
 import com.kamalnayan.domain.domain.usecase.GetCharactersUseCase
 import com.kamalnayan.knstarwars.base.BaseViewModel
 import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.onSuccess
 import dagger.Lazy
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -88,6 +89,10 @@ class CharacterViewModel @Inject constructor(
                 canLoadMore = !this.data.next.isNullOrBlank()
                 _isNextPageLoading.postValue(false)
             }.onError {
+                isLoading = false
+                canLoadMore = false
+                _isNextPageLoading.postValue(false)
+            }.onFailure {
                 isLoading = false
                 canLoadMore = false
                 _isNextPageLoading.postValue(false)

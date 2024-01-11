@@ -21,14 +21,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-    //Give an option for filtering and sorting based on name, gender, created, updated,
-    // etc. Filter and sort option item list should open in a bottom sheet.
-
-    const val NAMED_DEFAULT = "named_default"
-    const val NAMED_SORT_BY_NAME = "named_sort_by_name"
-    const val NAMED_SORT_BY_GENDER = "named_sort_by_gender"
-    const val NAMED_SORT_BY_CREATED = "named_sort_by_created"
-    const val NAMED_SORT_BY_UPDATED = "named_sort_by_updated"
 
     @Provides
     @Singleton

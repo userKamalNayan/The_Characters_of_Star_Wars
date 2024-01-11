@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 /** @Author Kamal Nayan
 Created on: 10/01/24
+ *
+ * Was facing crashes with [GridLayoutManager], hence
+ * used this class to disable some functionalities
  **/
 class ExtendedGridLayoutManager : GridLayoutManager {
 
@@ -25,13 +28,6 @@ class ExtendedGridLayoutManager : GridLayoutManager {
         reverseLayout: Boolean
     ) : super(context, spanCount, orientation, reverseLayout)
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
-        try {
-            super.onLayoutChildren(recycler, state)
-        } catch (e: Exception) {
-            Log.e("error", "encountered exception = $e")
-        }
-    }
 
     override fun supportsPredictiveItemAnimations(): Boolean {
         return false

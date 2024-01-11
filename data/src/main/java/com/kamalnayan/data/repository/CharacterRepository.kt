@@ -31,6 +31,10 @@ class CharacterRepository @Inject constructor(
     override suspend fun getFilm(filmUrl: String): FilmResponse? {
         return withContext(Dispatchers.IO) {
             val filmFromLocalDb = dao.getFilm(filmUrl)
+            /**
+             * Means data is not available locally, hence we are fetching it from remote
+             * then inserting it to db, and return the response
+             */
             if (filmFromLocalDb == null) {
                return@withContext suspendCoroutine<FilmResponse?> { continuation ->
                     this.launch {
