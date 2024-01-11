@@ -35,11 +35,27 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Title" />
 
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_filter_active"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@android:color/holo_green_dark"
+                    android:elevation="2dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_more"
+                    app:layout_constraintEnd_toEndOf="@id/iv_more"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toStartOf="@id/iv_more"
+                    app:layout_constraintTop_toTopOf="@id/iv_more"
+                    app:layout_constraintVertical_bias="0.08"
+                    app:shapeAppearanceOverlay="@style/Shape_Rounded"
+                    tools:visibility="visible" />
+
                 <ImageView
-                    android:layout_marginEnd="10dp"
                     android:id="@+id/iv_more"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
+                    android:layout_marginEnd="10dp"
                     android:background="?selectableItemBackgroundBorderless"
                     android:src="@android:drawable/ic_menu_more"
                     app:layout_constraintBottom_toBottomOf="parent"

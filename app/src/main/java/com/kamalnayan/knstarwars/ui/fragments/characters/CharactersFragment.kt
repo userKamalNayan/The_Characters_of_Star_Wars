@@ -1,8 +1,7 @@
 package com.kamalnayan.knstarwars.ui.fragments.characters
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.kamalnayan.commons.modifier.CharacterModifier
 import com.kamalnayan.commons.modifier.ModifierType
@@ -11,13 +10,17 @@ import com.kamalnayan.knstarwars.base.BaseFragment
 import com.kamalnayan.knstarwars.databinding.FragmentCharactersBinding
 import com.kamalnayan.knstarwars.epoxy.controller.CharactersController
 import com.kamalnayan.knstarwars.ui.dialog.BtsCharacterDataModifier
+import com.kamalnayan.knstarwars.util.extension.loadMoreListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharactersFragment :
     BaseFragment<FragmentCharactersBinding>(FragmentCharactersBinding::inflate) {
+
+    companion object {
+        private val DEFAULT_SORT_FILTER =
+            CharacterModifier.Default(ModifierType.Sort) to CharacterModifier.Default(ModifierType.Filter)
+    }
 
     private val viewModel by viewModels<CharacterViewModel>()
     private val controller by lazy {
@@ -25,13 +28,24 @@ class CharactersFragment :
     }
 
     private var sortAndFilterSelection: Pair<CharacterModifier, CharacterModifier> =
-        CharacterModifier.Default(ModifierType.Sort) to CharacterModifier.Default(ModifierType.Filter)
+        DEFAULT_SORT_FILTER
         set(value) {
             field = value
-            setObservers()
+            fetchData()
+            setIndicatorVisibility()
         }
 
+    /**
+     * Handles visibility of filter indicator.
+     * Shows when any modifier is applied else hides
+     */
+    private fun setIndicatorVisibility() {
+        binding.toolbar.ivFilterActive.isVisible =
+            sortAndFilterSelection.first  !is  CharacterModifier.Default || sortAndFilterSelection.second !is CharacterModifier.Default
+    }
+
     override fun fetchData() {
+        viewModel.getCharactersData(sortAndFilterSelection)
     }
 
     override fun setViewModelToBinding() {
@@ -44,6 +58,7 @@ class CharactersFragment :
             with(toolbar) {
                 tvTitle.text = getString(R.string.title_characters_screen)
             }
+            setIndicatorVisibility()
         }
     }
 
@@ -54,6 +69,10 @@ class CharactersFragment :
         with(binding) {
             toolbar.ivMore.setOnClickListener {
                 showModifierBottomSheet()
+            }
+
+            epoxyRecycler.loadMoreListener {
+                viewModel.fetchCharactersDataFromRemote(controller.characterList?.size ?: 1)
             }
         }
 
@@ -79,12 +98,15 @@ class CharactersFragment :
 
     override fun setObservers() {
         with(viewModel) {
-            lifecycleScope.launch {
-                charactersData(sortAndFilterSelection)
-                    .flowWithLifecycle(viewLifecycleOwner.lifecycle)
-                    .collectLatest {
-                        controller.submitData(it)
-                    }
+            characters.observe(viewLifecycleOwner) { response ->
+                response?.let {
+                    controller.characterList = it
+                }
+            }
+            isNextPageLoading.observe(viewLifecycleOwner) { response ->
+                response?.let {
+                    controller.isLoading = it
+                }
             }
         }
     }

@@ -48,6 +48,7 @@ dependencies {
     implementation("javax.inject:javax.inject:1")
 
     api(Dependencies.room)
+    api(Dependencies.roomKtx)
     api(Dependencies.roomPaging)
     api(Dependencies.paging)
     kapt(Dependencies.roomCompiler)

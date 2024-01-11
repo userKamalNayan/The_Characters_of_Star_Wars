@@ -1,5 +1,7 @@
 package com.kamalnayan.domain.domain.models.film
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.kamalnayan.domain.domain.base.response.BaseResponse
 import kotlinx.parcelize.Parcelize

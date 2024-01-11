@@ -86,6 +86,7 @@ dependencies {
     implementation(Dependencies.shimmer)
 
     api(Dependencies.room)
+    api(Dependencies.roomKtx)
     api(Dependencies.roomPaging)
     api(Dependencies.paging)
     kapt(Dependencies.roomCompiler)

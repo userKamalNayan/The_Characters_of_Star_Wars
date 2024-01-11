@@ -6,6 +6,11 @@
         <item name="cornerSize">4%</item>
     </style>
 
+    <style name="Shape_Rounded">
+        <item name="shapeCornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="TextAppearance.AppCompat.Headline">
         <item name="android:fontFamily">monospace</item>
         <item name="android:textSize">@dimen/text_large</item>

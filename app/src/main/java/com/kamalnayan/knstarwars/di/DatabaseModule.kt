@@ -43,17 +43,17 @@ object DatabaseModule {
         return appDatabase.charactersDao()
     }
 
-    @Singleton
-    @Provides
-    fun provideCharacterPager(
-        apiService: ApiService,
-        charactersDao: CharactersDao
-    ): Pager<Int, CharacterItem> {
-        return Pager(
-            config = PagingConfig(pageSize = 10, prefetchDistance = 10),
-            remoteMediator = CharacterRemoteMediator(apiService, charactersDao),
-            pagingSourceFactory = { charactersDao.getCharacters() },
-            initialKey = null
-        )
-    }
+//    @Singleton
+//    @Provides
+//    fun provideCharacterPager(
+//        apiService: ApiService,
+//        charactersDao: CharactersDao
+//    ): Pager<Int, CharacterItem> {
+//        return Pager(
+//            config = PagingConfig(pageSize = 10, prefetchDistance = 10),
+//            remoteMediator = CharacterRemoteMediator(apiService, charactersDao),
+//            pagingSourceFactory = { charactersDao.getCharacters() },
+//            initialKey = null
+//        )
+//    }
 }

@@ -1,55 +1,77 @@
 package com.kamalnayan.domain.domain.usecase
 
-import androidx.paging.PagingData
-import androidx.paging.filter
 import com.kamalnayan.commons.annotation.Gender
+import com.kamalnayan.commons.extension.Empty
 import com.kamalnayan.commons.modifier.CharacterModifier
 import com.kamalnayan.domain.domain.base.usecase.BaseUseCase
 import com.kamalnayan.domain.domain.models.character.CharacterItem
 import com.kamalnayan.domain.domain.repository.ICharactersRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /** @Author Kamal Nayan
 Created on: 09/01/24
  **/
 class GetCharactersUseCase @Inject constructor(private val repository: ICharactersRepository) :
-    BaseUseCase<Pair<CharacterModifier, CharacterModifier>, Flow<PagingData<CharacterItem>>>() {
-    override suspend fun invoke(params: Pair<CharacterModifier, CharacterModifier>?): Flow<PagingData<CharacterItem>> {
-        return when (params?.second) {
-            CharacterModifier.Created -> {
-                repository.getCharacters()
-            }
+    BaseUseCase<Pair<CharacterModifier, CharacterModifier>, Flow<List<CharacterItem>>>() {
 
-            is CharacterModifier.Default -> {
-                repository.getCharacters()
-            }
+    companion object {
+        private const val MALE = "male"
+        private const val FEMALE = "female"
+    }
 
-            is CharacterModifier.Gender -> {
-                val gender = (params.second as CharacterModifier.Gender).gender ?: Gender.MALE
-                return repository.getCharacters().mapLatest {
-                    it.filter { it.gender == if (gender == Gender.MALE) "male" else "female" }
+    override suspend fun invoke(params: Pair<CharacterModifier, CharacterModifier>?): Flow<List<CharacterItem>> {
+        val isGenderFilterEnabled = params?.second is CharacterModifier.Gender
+        var genderForFilter = String.Empty
+        if (isGenderFilterEnabled) {
+            genderForFilter =
+                if ((params?.second as CharacterModifier.Gender).gender == Gender.MALE) MALE else FEMALE
+        }
+        return repository.getCharacters().map { list ->
+            when (params?.first) {
+                CharacterModifier.Created -> {
+                    list.sortedBy {
+                        it.created
+                    }
+                }
+
+                is CharacterModifier.Default -> {
+                    list
+                }
+
+                is CharacterModifier.Gender -> {
+                    list
+                }
+
+                CharacterModifier.Height -> {
+                    list.sortedBy {
+                        it.height
+                    }
+                }
+
+                CharacterModifier.Name -> {
+                    list.sortedBy {
+                        it.name
+                    }
+                }
+
+                CharacterModifier.Updated -> {
+                    list.sortedBy {
+                        it.edited
+                    }
+                }
+
+                null -> {
+                    list
                 }
             }
-
-            CharacterModifier.Height -> {
-                repository.getCharacters()
-            }
-
-            CharacterModifier.Name -> {
-                repository.getCharacters()
-            }
-
-            CharacterModifier.Updated -> {
-                repository.getCharacters()
-            }
-
-            null -> {
-                repository.getCharacters()
+        }.map { sortedList ->
+            sortedList.filter {
+                if (isGenderFilterEnabled) {
+                    it.gender == genderForFilter
+                } else true
             }
         }
     }
-
-
 }
