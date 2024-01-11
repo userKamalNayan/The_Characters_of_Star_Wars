@@ -3,6 +3,7 @@ package com.kamalnayan.knstarwars.ui.fragments.characters
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.kamalnayan.commons.extension.showToast
 import com.kamalnayan.commons.modifier.CharacterModifier
 import com.kamalnayan.commons.modifier.ModifierType
 import com.kamalnayan.knstarwars.R
@@ -41,7 +42,7 @@ class CharactersFragment :
      */
     private fun setIndicatorVisibility() {
         binding.toolbar.ivFilterActive.isVisible =
-            sortAndFilterSelection.first  !is  CharacterModifier.Default || sortAndFilterSelection.second !is CharacterModifier.Default
+            sortAndFilterSelection.first !is CharacterModifier.Default || sortAndFilterSelection.second !is CharacterModifier.Default
     }
 
     override fun fetchData() {
@@ -72,7 +73,7 @@ class CharactersFragment :
             }
 
             epoxyRecycler.loadMoreListener {
-                viewModel.fetchCharactersDataFromRemote(controller.characterList?.size ?: 1)
+                viewModel.fetchCharactersDataFromRemote()
             }
         }
 
@@ -106,6 +107,12 @@ class CharactersFragment :
             isNextPageLoading.observe(viewLifecycleOwner) { response ->
                 response?.let {
                     controller.isLoading = it
+                }
+            }
+
+            error.observe(viewLifecycleOwner) { response ->
+                response?.let {
+                    requireContext().showToast(it)
                 }
             }
         }

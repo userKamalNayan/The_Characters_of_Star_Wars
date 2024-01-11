@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kamalnayan.commons.modifier.CharacterModifier
+import com.kamalnayan.data.error.ErrorEnvelopeMapper
 import com.kamalnayan.domain.domain.models.character.CharacterItem
 import com.kamalnayan.domain.domain.usecase.FetchCharactersFromRemoteUseCase
 import com.kamalnayan.domain.domain.usecase.GetCharactersUseCase
 import com.kamalnayan.knstarwars.base.BaseViewModel
 import com.skydoves.sandwich.onError
-import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.onSuccess
 import dagger.Lazy
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -48,22 +48,40 @@ class CharacterViewModel @Inject constructor(
     private val _isNextPageLoading by lazy { MutableLiveData<Boolean>() }
     val isNextPageLoading: LiveData<Boolean> by lazy { _isNextPageLoading }
 
+    private val _error by lazy { MutableLiveData<String>() }
+    val error: LiveData<String> by lazy { _error }
+
+
+    /**
+     * Holds the page number which will be fetched from remote
+     *
+     * @see fetchCharactersDataFromRemote
+     */
+    private var pageNumberToLoad: Int = Integer.MIN_VALUE
+
 
     /**
      * Fetches characters data from local db
-     * if data is null then we fetch data from remote
+     * if data is null then we fetch data from remote using [fetchCharactersDataFromRemote]
      *
-     * @see fetchCharactersDataFromRemote
+     * When data is received we update the [pageNumberToLoad] value.
      */
     fun getCharactersData(sortAndFilterSelection: Pair<CharacterModifier, CharacterModifier>) {
         getCharactersJob?.cancel()
         getCharactersJob = viewModelScope.launch {
             getCharactersUseCase(sortAndFilterSelection).collect {
-                _loading.postValue(it.isNullOrEmpty())
                 if (it.isNullOrEmpty()) {
                     // load first page , as the db is empty
-                    fetchCharactersDataFromRemote(1)
+                    _loading.postValue(true)
+                    pageNumberToLoad = 1
+                    fetchCharactersDataFromRemote()
+                } else {
+                    pageNumberToLoad = (it.size / PAGE_SIZE) + 1
+                    // for case where 82 items are available,
+                    // it means page 9 has 2 items only , hence this is last page
+                    canLoadMore = it.size % PAGE_SIZE == 0
                 }
+
                 _characters.postValue(it)
             }
         }
@@ -71,31 +89,36 @@ class CharacterViewModel @Inject constructor(
 
 
     /**
-     * Fetches data from remote. Data is stored in local DB
+     * Fetches data from remote.
+     *
+     * assigning [Integer.MIN_VALUE] to [pageNumberToLoad] in order to
+     * prevent duplicate page calls. when new page data is received
+     * [getCharactersData] gets the updated data and there [pageNumberToLoad]
+     * is updated. so in this way duplication is prevented
      *
      * @see com.kamalnayan.data.repository.CharacterRepository.fetchCharactersFromRemote
      */
-    fun fetchCharactersDataFromRemote(size: Int) {
-        val pageNumber = (size / PAGE_SIZE) + 1
-        if (isLoading || !canLoadMore)
+    fun fetchCharactersDataFromRemote() {
+        if (isLoading || !canLoadMore || pageNumberToLoad == Integer.MIN_VALUE)
             return
+
         isLoading = true
         viewModelScope.launch {
-            if (pageNumber > 1)
+            if (pageNumberToLoad > 1)
                 _isNextPageLoading.postValue(true)
-            val response = fetchCharactersFromRemoteUseCase.get().invoke(pageNumber)
+            val response = fetchCharactersFromRemoteUseCase.get().invoke(pageNumberToLoad)
             response.onSuccess {
-                isLoading = false
+                pageNumberToLoad = Integer.MIN_VALUE
                 canLoadMore = !this.data.next.isNullOrBlank()
                 _isNextPageLoading.postValue(false)
-            }.onError {
+                isLoading = false
+                _loading.postValue(false)
+            }.onError(ErrorEnvelopeMapper) {
                 isLoading = false
                 canLoadMore = false
+                _error.postValue(this.apiErrorMessage.toString())
                 _isNextPageLoading.postValue(false)
-            }.onFailure {
-                isLoading = false
-                canLoadMore = false
-                _isNextPageLoading.postValue(false)
+                _loading.postValue(false)
             }
         }
     }
