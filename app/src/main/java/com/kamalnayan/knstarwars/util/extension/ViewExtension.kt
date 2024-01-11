@@ -9,7 +9,7 @@ Created on: 10/01/24
  **/
 
 /**
- * If the current position is 6 less than the last position then the [loadMoreData] will be
+ * If the current position is 6 items less than the last position then the [loadMoreData] will be
  * invoked.
  */
 fun EpoxyRecyclerView.loadMoreListener(threshold: Int = 6, loadMoreData: () -> Unit) {

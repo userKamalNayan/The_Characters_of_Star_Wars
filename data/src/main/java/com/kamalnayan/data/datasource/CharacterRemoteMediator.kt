@@ -16,6 +16,12 @@ import javax.inject.Inject
 
 /** @Author Kamal Nayan
 Created on: 10/01/24
+ *
+ **/
+/**
+ * **NOT IN USE**
+ *
+ * This class is in working condition.
  **/
 @OptIn(ExperimentalPagingApi::class)
 class CharacterRemoteMediator @Inject constructor(

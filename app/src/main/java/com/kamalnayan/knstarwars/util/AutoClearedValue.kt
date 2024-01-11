@@ -9,8 +9,6 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
- * Created by Kamal Nayan on August 22, 2022.
- *
  * A lazy property that wraps any type into a lifecycle-aware container that takes care of setting it to null when the fragment's view is destroyed.
  * Accessing this variable while the fragment's view is destroyed will throw NPE.
  */

@@ -24,10 +24,18 @@ class CharacterRepository @Inject constructor(
     private val apiService: ApiService, private val dao: CharactersDao
 ) : ICharactersRepository {
 
+    /**
+     * Fetches Characters data from local db
+     */
     override suspend fun getCharacters(): Flow<List<CharacterItem>> {
         return dao.getCharacters()
     }
 
+    /**
+     * We first fetch data from local db, if it is null then
+     * we fetch it from remote and store is locally, and
+     * return the result.
+     */
     override suspend fun getFilm(filmUrl: String): FilmResponse? {
         return withContext(Dispatchers.IO) {
             val filmFromLocalDb = dao.getFilm(filmUrl)
@@ -52,6 +60,10 @@ class CharacterRepository @Inject constructor(
         }
     }
 
+
+    /**
+     * Fetches characters data from remote and inserts it to local db
+     */
     override suspend fun fetchCharactersFromRemote(page: Int): ApiResponse<CharactersResponse> {
         val response = apiService.getCharacters(page)
         response.suspendOnSuccess {

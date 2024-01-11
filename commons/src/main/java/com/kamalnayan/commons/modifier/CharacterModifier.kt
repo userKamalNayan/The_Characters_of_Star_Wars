@@ -3,6 +3,10 @@ package com.kamalnayan.commons.modifier
 /** @Author Kamal Nayan
 Created on: 10/01/24
  **/
+
+/**
+ * Used for performing Sorting and Filtration operation on characters data
+ */
 sealed class CharacterModifier(private val modifierType: ModifierType) {
     class Default(modifierType: ModifierType) : CharacterModifier(modifierType)
     data object Name : CharacterModifier(ModifierType.Sort)
