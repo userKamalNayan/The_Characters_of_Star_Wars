@@ -2,7 +2,7 @@
 This project shows characters of Star Wars. And other movies by the characters.
 
 **Used**
-* Hilt for DI (In multiple modules)
+* Hilt for DI 
 * Offline support using Room DB
 * Epoxy Recycler view, Used both ways:
     * Data binding
