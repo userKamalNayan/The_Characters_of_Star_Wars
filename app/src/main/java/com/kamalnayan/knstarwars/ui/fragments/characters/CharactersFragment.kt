@@ -1,5 +1,6 @@
 package com.kamalnayan.knstarwars.ui.fragments.characters
 
+import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,8 @@ class CharactersFragment :
     BaseFragment<FragmentCharactersBinding>(FragmentCharactersBinding::inflate) {
 
     companion object {
+        private const val ARG_SORT_STATE = "arg_sort_state"
+        private const val ARG_FILTER_STATE = "arg_filter_state"
         private val DEFAULT_SORT_FILTER =
             CharacterModifier.Default(ModifierType.Sort) to CharacterModifier.Default(ModifierType.Filter)
     }
@@ -115,6 +118,30 @@ class CharactersFragment :
                     requireContext().showToast(it)
                 }
             }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(ARG_SORT_STATE, sortAndFilterSelection.first)
+        outState.putParcelable(ARG_FILTER_STATE, sortAndFilterSelection.second)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.let {
+            val sort =
+                it.getParcelable<CharacterModifier>(ARG_SORT_STATE) ?: CharacterModifier.Default(
+                    ModifierType.Sort
+                )
+
+            val filter = it.getParcelable<CharacterModifier>(
+                ARG_FILTER_STATE
+            ) ?: CharacterModifier.Default(
+                ModifierType.Filter
+            )
+
+            sortAndFilterSelection = sort to filter
         }
     }
 
