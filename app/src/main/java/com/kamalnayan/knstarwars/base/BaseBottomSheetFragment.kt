@@ -11,7 +11,7 @@ import com.kamalnayan.knstarwars.R
 import com.kamalnayan.knstarwars.util.autoCleared
 
 /** @Author Kamal Nayan
-Created on: 06/01/24
+Created on: 09/01/24
  **/
 abstract class BaseBottomSheetFragment<B : ViewDataBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> B
