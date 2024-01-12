@@ -62,25 +62,19 @@ class CharacterViewModel @Inject constructor(
 
     /**
      * Fetches characters data from local db
-     * if data is null then we fetch data from remote using [fetchCharactersDataFromRemote]
      *
      * When data is received we update the [pageNumberToLoad] value.
      */
     fun getCharactersData(sortAndFilterSelection: Pair<CharacterModifier, CharacterModifier>) {
+        _loading.postValue(true)
         getCharactersJob?.cancel()
         getCharactersJob = viewModelScope.launch {
             getCharactersUseCase(sortAndFilterSelection).collect {
-                if (it.isNullOrEmpty()) {
-                    // load first page , as the db is empty
-                    _loading.postValue(true)
-                    pageNumberToLoad = 1
-                    fetchCharactersDataFromRemote()
-                } else {
-                    pageNumberToLoad = (it.size / PAGE_SIZE) + 1
-                    // for case where 82 items are available,
-                    // it means page 9 has 2 items only , hence this is last page
-                    canLoadMore = it.size % PAGE_SIZE == 0
-                }
+                _loading.postValue(it.isNullOrEmpty())
+                pageNumberToLoad = (it.size / PAGE_SIZE) + 1
+                // for case where 82 items are available,
+                // it means page 9 has 2 items only , hence this is last page
+                canLoadMore = it.size % PAGE_SIZE == 0
 
                 _characters.postValue(it)
             }

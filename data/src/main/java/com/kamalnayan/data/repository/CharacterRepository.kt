@@ -1,5 +1,6 @@
 package com.kamalnayan.data.repository
 
+import android.util.Log
 import com.kamalnayan.data.api.ApiService
 import com.kamalnayan.data.db.dao.CharactersDao
 import com.kamalnayan.domain.domain.models.character.CharacterItem
@@ -11,6 +12,7 @@ import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -26,9 +28,16 @@ class CharacterRepository @Inject constructor(
 
     /**
      * Fetches Characters data from local db
+     * if list is empty then we make the api call for first
+     * page of data.
      */
     override suspend fun getCharacters(): Flow<List<CharacterItem>> {
-        return dao.getCharacters()
+        Log.d("repo-decide", "getCharacters: fetching data locally")
+        return dao.getCharacters().onEach {
+            if (it.isNullOrEmpty()) {
+                fetchCharactersFromRemote(1)
+            }
+        }
     }
 
     /**
@@ -44,7 +53,7 @@ class CharacterRepository @Inject constructor(
              * then inserting it to db, and return the response
              */
             if (filmFromLocalDb == null) {
-               return@withContext suspendCoroutine<FilmResponse?> { continuation ->
+                return@withContext suspendCoroutine<FilmResponse?> { continuation ->
                     this.launch {
                         apiService.getFilm(filmUrl).suspendOnSuccess {
                             dao.upsertFilm(this@suspendOnSuccess.data)
@@ -65,9 +74,11 @@ class CharacterRepository @Inject constructor(
      * Fetches characters data from remote and inserts it to local db
      */
     override suspend fun fetchCharactersFromRemote(page: Int): ApiResponse<CharactersResponse> {
+        Log.d("repo-decide", "getCharacters: making api call ")
         val response = apiService.getCharacters(page)
         response.suspendOnSuccess {
             withContext(Dispatchers.IO) {
+                Log.d("repo-decide", "getCharacters: api call success")
                 dao.insertCharacters(this@suspendOnSuccess.data.characterItems)
             }
         }
