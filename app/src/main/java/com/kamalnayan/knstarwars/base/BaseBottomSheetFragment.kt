@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kamalnayan.commons.extension.Empty
 import com.kamalnayan.knstarwars.R
 import com.kamalnayan.knstarwars.util.autoCleared
 
@@ -40,10 +41,12 @@ abstract class BaseBottomSheetFragment<B : ViewDataBinding>(
         setObservers()
     }
 
+    abstract fun fetchData()
+
+
     /**
      * Used to set view model to view binding
      */
-    abstract fun fetchData()
     abstract fun setViewModelToBinding()
 
     abstract fun initViews()
@@ -59,7 +62,7 @@ abstract class BaseBottomSheetFragment<B : ViewDataBinding>(
     }
 
     protected fun Int.toStringFromResourceId(): String =
-        context?.resources?.getString(this) ?: ""
+        context?.resources?.getString(this) ?: String.Empty
 
     protected fun Int.toColor() = ContextCompat.getColor(requireContext(), this)
 }
