@@ -2,6 +2,7 @@
 This project shows characters of Star Wars. And other movies by the characters.
 
 **Used**
+* Used Single Activity Multiple Fragments architecture.
 * Hilt for DI 
 * Offline support using Room DB
 * Epoxy Recycler view, Used both ways:
